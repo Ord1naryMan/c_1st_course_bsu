@@ -1,12 +1,10 @@
 #include<bits/stdc++.h>
 
-
-using ll = long long;
 using namespace std;
 
-int main() {
-
-	cout << "hello";
-
+int main(){
+	string a;
+	cin >> a;
+	cout << a;
 	return 0;
 }
