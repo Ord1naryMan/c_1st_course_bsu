@@ -3,11 +3,24 @@
 using namespace std;
 
 int main(){
-	int w;
-	cout << ":\n";
-	do{
-		scanf_s("%i", &w, 1);
-		cout << w;
-	}while(w != 1 || w != 2 || w != 3);
+	string a;
+	int b;
+	bool is_runing = true;
+	while (is_runing){
+		cin >> a;
+		if(a == "1"){
+			b = 1;
+			is_runing = false;
+		}
+		else if(a == "2"){
+			b = 2;
+			is_runing = false;
+		}
+		else if(a == "3"){
+			b = 3;
+			is_runing = false;
+		}
+		}
+	cout << b;
 	return 0;
 }
