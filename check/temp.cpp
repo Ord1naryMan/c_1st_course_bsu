@@ -6,16 +6,7 @@ using namespace std;
 
 int main() {
 
-	string input;
-	
-	ll x;
-
-	cout << "Enter x:";
-	while (!x) {
-		cin >> input;
-		for (auto& x : input) cout << x;
-		x = 1;
-	}
+	cout << "hello";
 
 	return 0;
 }
