@@ -1,59 +1,55 @@
 #include<bits/stdc++.h>
-#include "funcs_for_laba6.cpp"
+#include "funcs_for_laba6.h"
 
 using namespace std;
 
-
-enum choices{
-    INT = 'i',
-    FLOAT = 'f',
-    DOUBLE = 'd',
-    CHAR = 'c',
-
-    RANDOM = 'r',
-    UP = 'u',
-    DOWN = 'd',
-
-    INSERTION = 'i',
-    EXCEPTION = 'e'
-};
-
 template<typename T>
-void process(int n){
-    T* arr = new T[n];
+void process(){
+    int len = 10;
     char answer;
-    cout << "How do you want to initialaise array(random, up, down)?[r/u/d] ";
+    int it;
+    cout << "How many iterations?[MAX=4] ";
+    cin >> it;
+    cout << "How do you want to initialaise array(random, up, down)?[r/u/d]: ";
     cin >> answer;
-    switch(answer){
-        case choices::RANDOM: get_rand(arr, n); break;
-        case choices::UP: get_up(arr, n); break;
-        case choices::DOWN: get_down(arr, n); break;
-        default: {cout << "Pls enter your choose as i ask you to do!"; return ;}
-    }
-    cout << "Choose what type of sorting do you want(insertion, exchange)? [i/e]";
-    cin >> answer;
-    switch(answer){
-        case choices::INSERTION: insertion_sorting(arr, n); break;
-        case choices::EXCEPTION: sorting_exchange(arr, n); break;
-        default: {cout << "Pls enter your choose as i ask you to do!"; return ;}
-    }
+    cout << "+-----+----------------------+-------------------------+--------------------+------------------------+\n"
+             << "|Num  | insertion if counter | insertion swap counter  | exchange if counter|  exchange swap counter |\n"
+                <<"+-----+----------------------+-------------------------+--------------------+------------------------+\n";
     
-    for(int i=0;i<n;i++) cout << arr[i] << " ";
-    return;
+    for(int i=0;i<it;i++, len*=10){
+        T* arr1 = new T[len];
+        T* arr2 = new T[len];
+        switch((init_mode)answer){
+            case init_mode::RANDOM: get_rand(arr1, arr2,  len); break;
+            case init_mode::UP: get_up(arr1,arr2, len); break;
+            case init_mode::DOWN: get_down(arr1, arr2, len); break;
+            default: {
+                cout << "Pls enter your choose as i ask you to do!"; 
+                return;
+            }
+        }
+        insertion_sorting(arr1, len);
+        sorting_exchange(arr2, len);
+        cout << "+-----+----------------------+-------------------------+--------------------+------------------------+\n";
+        
+    
+    
+    
+    }
+
+
 }
 
 int main(){
-    int n;
-    cout << "enter size of array: ";
-    cin >> n;
+
     char choice;
     cout << "What datatype should i use?(int, float, double, char)[i/f/d/c]";
     cin >> choice;
-    switch(choice){
-        case choices::INT: process<int>(n); break;
-        case choices::FLOAT: process<float>(n); break;
-        case choices::DOUBLE: process<double>(n); break;
-        case choices::CHAR: process<char>(n); break;
+    switch((data_type)choice){
+        case data_type::INT: process<int>(); break;
+        case data_type::FLOAT: process<float>(); break;
+        case data_type::DOUBLE: process<double>(); break;
+        case data_type::CHAR: process<char>(); break;
         default: cout<< "you entered wrong num"; return 0;
     }
 

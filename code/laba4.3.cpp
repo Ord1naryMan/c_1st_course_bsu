@@ -1,31 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int NOS = 10;  //number_os_separators
+
+
 int main(){
-    char separators[] = {' ' ,  '.' ,  ',' ,  ':' ,  ';' , '!' ,   '?' ,  '-' ,  '(' ,  ')'};
+    const char* dividers = " .,:;!?-()";
+
     cout << "Enter length: ";
     int length;
-    cin >> length;    
-    char word[length];
-    fill(word, word+length, 0);
+    cin >> length; 
     cin.ignore();
-    cin.getline(word, length);
-    int end = length;
-    bool separate{};
-    for(int i=0;i<length;i++){
-        separate = (find(separators, separators+NOS, word[i]) != separators+NOS);
-         if(separate){
-            end = i;
+    
+    char* input = new char[length+1]{};
+    cin.getline(input, length);
+
+    char* word = strtok(input, dividers);
+    char* word_first = strdup(word);
+
+    while (word != nullptr){
+        word = strtok(nullptr, dividers);
+        if(!word) 
             break;
-         }
+        
+        int i = 0;
+        bool correct = true;    
+        while(word[i] != '\0'){ 
+            if(!strchr(word_first, word[i])){
+                correct = false;
+                break;
+            }
+            i++;
+        }
+        
+        if (correct)
+            cout << word << "\n";
+        
     }
-    srand (time(NULL));
-    int range = rand()%7;
-    char new_word[range];
-    for(int i=0;i<range;i++)
-        new_word[i] = word[rand()%end];
-    cout << new_word << "\n";
+    
+    delete[] word;
+    
     return 0;
 }
 
-//how to read char with spaces
+

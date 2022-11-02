@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
 bool compare(int* x, int* y) {
     return ( (x[0] < y[0]) || (x[0] == y[0]) );
 }
@@ -21,8 +22,8 @@ void output_matrix(int n, int m, int **ptr){
     }
 }
 
-void sort_matrix(int n, int m,int **ptr){
-    sort(ptr, ptr+n, &compare);
+void sort_matrix(int n,int **ptr){
+    sort(&ptr[0], &ptr[n], &compare);
 }
 
 
@@ -30,11 +31,11 @@ int main(){
     int n, m;
     cout << "Enter matrix size (X x Y): ";
     cin >> m >> n;
-    int *matrix[n];
+    int** matrix = new int*[n];
     for(int i = 0; i < n; i++)
         matrix[i] = new int[m];
     input_matrix(n, m, matrix);
-    sort_matrix(n, m, matrix);
+    sort_matrix(n, matrix);
     output_matrix(n, m, matrix);
     return 0;
 }

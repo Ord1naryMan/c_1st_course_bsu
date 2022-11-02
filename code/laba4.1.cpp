@@ -1,30 +1,62 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+
 using namespace std;
 
+int convert(char ch)
+{
+   int value = 0;
 
-int main(){
-    int dec{};
-    string a, temp;
-    cin >> a;
-    while(a.size() > 0){
-        if (temp.assign(a, 0, 1) == "M") {dec += 1000; a.assign(a, 1, a.size()-1);}
-        else if (temp.assign(a, 0, 2) == "CM") {dec += 900; a.assign(a, 2, a.size()-2);}
-        else if (temp.assign(a, 0, 1) == "D") {dec += 500; a.assign(a, 1, a.size()-1);}
-        else if (temp.assign(a, 0, 2) == "CD") {dec += 400; a.assign(a, 2, a.size()-2);}
-        else if (temp.assign(a, 0, 1) == "C") {dec += 100; a.assign(a, 1, a.size()-1);}
-        else if (temp.assign(a, 0, 2) == "XC") {dec += 90; a.assign(a, 2, a.size()-2);}
-        else if (temp.assign(a, 0, 1) == "L") {dec += 50; a.assign(a, 1, a.size()-1);}
-        else if (temp.assign(a, 0, 2) == "XL") {dec += 40; a.assign(a, 2, a.size()-2);}
-        else if (temp.assign(a, 0, 1) == "X") {dec += 10; a.assign(a, 1, a.size()-1);}
-        else if (temp.assign(a, 0, 2) == "IX") {dec += 9; a.assign(a, 2, a.size()-2);}
-        else if (temp.assign(a, 0, 1) == "V") {dec += 5; a.assign(a, 1, a.size()-1);}
-        else if (temp.assign(a, 0, 2) == "IV") {dec += 4; a.assign(a, 2, a.size()-2);}
-        else if (temp.assign(a, 0, 1) == "I") {dec += 1; a.assign(a, 1, a.size()-1);}
-        else{
-            cout << "wrong letters";
-            return 0;
-        }
-     }
-    cout << dec;
-    return 0;
+   switch(ch)
+   {
+      case 'I': return 1;
+      case 'V': return 5;
+      case 'X': value = 10; break;
+      case 'L': value = 50; break;
+      case 'C': value = 100; break;
+      case 'D': value = 500; break;
+      case 'M': value = 1000; break;
+      default: value = -1;
+   }
+   return value;
 }
+
+int main (){
+   int i = 0, num = 0;
+   char romanNumber[100];
+
+   cout << "Enter roman number: ";
+   cin >> romanNumber;
+
+   while(romanNumber[i]){
+      if(convert(romanNumber[i]) < 0 ){
+         printf("\nInvalid Roman Number.\n");
+         return 1;
+      }
+
+      if((strlen(romanNumber) - i ) > 2){
+        bool is_correct = 
+            convert(romanNumber[i]) < convert(romanNumber[i + 2]) ||
+            ((strlen(romanNumber) - i ) > 3 && 
+            convert(romanNumber[i]) == convert(romanNumber[i + 3]) &&
+            convert(romanNumber[i]) == convert(romanNumber[i + 2])&&
+            convert(romanNumber[i]) == convert(romanNumber[i + 1]));
+         
+         if(is_correct){
+            cout << "Incorrect number!";
+            return 0;
+         }
+      }
+
+      if(convert(romanNumber[ i ]) >= convert(romanNumber[i + 1])) 
+         num = num + convert(romanNumber[ i ]);
+      else{
+         num += (convert(romanNumber[i+1]) - convert(romanNumber[i]));
+         i++;
+      }
+      i++;
+   }
+
+   cout << num;
+   return 0;
+}
+
