@@ -11,10 +11,10 @@ int main() {
     *it = new int[n]{0};
 
 
-  arr::read(ar, n);
+  matrix::read(ar, n);
   std::cout << std::endl << std::endl;
-  arr::print(ar, n);
+  matrix::print(ar, n);
 
-  arr::delete_ar(ar, n);
+  matrix::delete_ar(ar, n);
   return 0;
 }

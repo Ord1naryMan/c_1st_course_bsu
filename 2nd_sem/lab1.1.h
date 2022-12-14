@@ -1,7 +1,7 @@
 #pragma once
 #include<iostream>
 
-namespace arr{
+namespace matrix{
     inline void read(int **array, int length){
         int **row = array;                          //row of array
         int tmp, op{1}, lim{length}, i{}, j{}, c{length*length};
